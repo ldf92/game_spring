@@ -71,7 +71,8 @@ indicator_move = 0;
 // the moving distance of sprite, the sprite will move when enter is clicked
 global.moving_distance = 0;
 
-
+// if enter has been pressed or not
+enter_pressed = false;
 
 
 
@@ -97,7 +98,8 @@ global.moving_distance = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_end();
+            <string>show_message("Thanks for playing. Bye Bye!");
+game_end();
 </string>
           </argument>
         </arguments>
@@ -295,6 +297,8 @@ if(start_menu_position == index_start_game)
             draw_sprite_ext( spr_start_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, image_blend, 1 );
             draw_sprite_ext( spr_start_NewGame, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, c_red, 1 );   
             global.moving_distance += 5;
+            
+            alarm[0] = 100;
         }
         else
         {
@@ -352,6 +356,7 @@ if(start_menu_position == index_load_game)
             draw_sprite_ext( spr_start_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, image_blend, 1 );
             draw_sprite_ext( spr_start_LoadGame, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, c_red, 1 );   
             global.moving_distance += 5;
+            alarm[1] = 100;
         }
         else
         {
@@ -410,6 +415,7 @@ if(start_menu_position == index_options)
             draw_sprite_ext( spr_start_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, image_blend, 1 );
             draw_sprite_ext( spr_start_options, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, c_red, 1 );   
             global.moving_distance += 5;
+            alarm[2] = 100;
         }
         else
         {
@@ -468,6 +474,7 @@ if(start_menu_position == index_credits)
             draw_sprite_ext( spr_start_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, image_blend, 1 );
             draw_sprite_ext( spr_start_credits, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, c_red, 1 );   
             global.moving_distance += 5;
+            alarm[3] = 100;
         }
         else
         {
@@ -526,6 +533,7 @@ if(start_menu_position == index_quit)
             draw_sprite_ext( spr_start_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, image_blend, 1 );
             draw_sprite_ext( spr_start_quit, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, image_angle, c_red, 1 );   
             global.moving_distance += 5;
+            alarm[4] = 100;
         }
         else
         {
@@ -570,6 +578,7 @@ else
           <argument>
             <kind>1</kind>
             <string>index_when_press_enter = start_menu_position;
+enter_pressed = true;
 </string>
           </argument>
         </arguments>
@@ -592,16 +601,53 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// menu going down
-if(start_menu_position == number_of_menu_bars)
-{
-    start_menu_position = 1;
-}
-else if(start_menu_position &lt; number_of_menu_bars and start_menu_position &gt; 0)
-{
-    start_menu_position ++;
+            <string>if(enter_pressed == false)
+    {
+    // menu going down
+    if(start_menu_position == number_of_menu_bars)
+    {
+        start_menu_position = 1;
+    }
+    else if(start_menu_position &lt; number_of_menu_bars and start_menu_position &gt; 0)
+    {
+        start_menu_position ++;
+    }
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="39">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(enter_pressed == false)
+{
+    // menu going down
+    if(start_menu_position == number_of_menu_bars)
+    {
+        start_menu_position = 1;
+    }
+    else if(start_menu_position &lt; number_of_menu_bars and start_menu_position &gt; 0)
+    {
+        start_menu_position ++;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -624,16 +670,52 @@ else if(start_menu_position &lt; number_of_menu_bars and start_menu_position &gt
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// menu going up
-if(start_menu_position == 1)
+            <string>if(enter_pressed == false)
 {
-    start_menu_position = number_of_menu_bars;
+    // menu going up
+    if(start_menu_position == 1)
+    {
+        start_menu_position = number_of_menu_bars;
+    }
+    else if(start_menu_position &gt; 1 and start_menu_position &lt;= number_of_menu_bars)
+    {
+        start_menu_position --;
+    }
 }
-else if(start_menu_position &gt; 1 and start_menu_position &lt;= number_of_menu_bars)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="37">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(enter_pressed == false)
 {
-    start_menu_position --;
+    // menu going up
+    if(start_menu_position == 1)
+    {
+        start_menu_position = number_of_menu_bars;
+    }
+    else if(start_menu_position &gt; 1 and start_menu_position &lt;= number_of_menu_bars)
+    {
+        start_menu_position --;
+    }
 }
-
 </string>
           </argument>
         </arguments>
@@ -657,6 +739,7 @@ else if(start_menu_position &gt; 1 and start_menu_position &lt;= number_of_menu_
           <argument>
             <kind>1</kind>
             <string>index_when_press_enter = start_menu_position;
+enter_pressed = true;
 </string>
           </argument>
         </arguments>

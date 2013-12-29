@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,13 +25,78 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>paused=false;
+            <string>
+// which one is highlighted
+pause_menu_position = 1;
+// 1 - resume
+// 2 - load game
+// 3 - restart this stage
+// 4 - options
+// 5 - main menu
+// 6 - quit
+
+// the number of points on the 360' circle
+number_of_menu_bars = 6;
+number_of_midpoint_between_two_point = 16;
+number_of_point = number_of_menu_bars * number_of_midpoint_between_two_point;
+
+// radius of the circle
+radius = 200;
+
+// coordinates of the center of the circle
+x_of_center_of_circle = 400;
+y_of_center_of_circle = 300;
+
+// total and half degree of a circle
+TOTAL_DEGREE_OF_CIRCLE = 360;
+HALF_DEGREE_OF_CIRCLE = 180;
+
+// index
+index_resume = 1;
+index_load_game = 2;
+index_restart_this_stage = 3
+index_options = 4;
+index_main_menu = 5;
+index_quit = 6;
+
+// scales for resizing sprite
+scale_x_big = 1;
+scale_y_big = 1;
+scale_x_small = 0.7;
+scale_y_small = 0.7;
+
+// which one is selected when user press enter or z
+index_when_press_enter = 0;
+
+// the indicator that if we need to move the sprite
+// 1 - resume, 2 - load, 3 - restart, 4 - options, 5 - main menu, 6 - quit
+indicator_move = 0;
+
+// the moving distance of sprite, the sprite will move when enter is clicked
+moving_distance = 0;
+
+// the description box coordinates
+description_box_x1 = 0;
+description_box_y1 = 550;
+description_box_x2 = 800;
+description_box_y2 = 587;
+
+// when the menubar go from one point to another point, this variable
+// will indicate which mid-point it is at
+index_midpoint = 0;
+// when up/down are pressed, then all the menu bars are gonna start move
+move_or_not = false;
+
+// indicate which button has been pressed
+which_button_press = "null";
+left_or_right_temp = which_button_press;
+
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="2" enumb="5">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -48,19 +113,1135 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check_pressed(vk_enter))
+            <string>global.paused = false;
+show_message("Thanks for playing. Bye Bye!");
+game_end();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.paused = false;
+room_goto(room_start);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.paused = false;
+room_goto(room_options);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.paused = false;
+room_goto(room_game);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.paused = false;
+room_goto(room_load);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.paused = false;
+room_goto(room_game);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// if now the game is paused then we will draw the pause room
+if(global.paused == true)
 {
-    if(paused == true)
+    // we need to calculate the points' coordinates
+    // the coordinates of the points on the circle, stored in array
+    vec_x = 0;
+    vec_y = 0;
+    
+    // the angle between every two points
+    angle_per_point = TOTAL_DEGREE_OF_CIRCLE / number_of_point;
+    
+    //index i
+    i = 0;
+    
+    repeat (number_of_point)
     {
-        paused = false;
-        room_goto(room_game);
+        // the point array should start from the toppest point on the circle
+        angle = (i * angle_per_point - 90) * pi / HALF_DEGREE_OF_CIRCLE;
+        vec_x[i] = radius * cos(angle) + x_of_center_of_circle;
+        vec_y[i] = radius * sin(angle) + y_of_center_of_circle;
+        //draw_text(vec_x[i], vec_y[i], i);
+        i++;
     }
+    
+    // making the selected bar bigger and move to the center
+    // draw_sprite_ext( sprite, subimg, x, y, xscale, yscale, rot, color, alpha );
+    // e.g. draw_self = draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+    
+    // the center of the circle (800, 170)
+    // start game should be (440, 240), which is (vec_x[0], vec_y[0])
+    // load game should be (450, 315), which is (vec_x[1], vec_y[1])
+    
+    // the color for the description box
+    color_description_box = make_color_rgb(70,70,70);
+    draw_set_color(color_description_box);
+    draw_rectangle(description_box_x1, description_box_y1, description_box_x2, description_box_y2, false);
+    
+    
+    // 1. draw start game (it would be bigger and red color, and opaque)
+    
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    if(move_or_not == true)
+    {
+        if(which_button_press == "left")
+        {
+            // menu going up
+            if(pause_menu_position == 1)
+            {
+                pause_menu_position = number_of_menu_bars;
+            }
+            else if(pause_menu_position &gt; 1 and pause_menu_position &lt;= number_of_menu_bars)
+            {
+                pause_menu_position --;
+            }
+            which_button_press = "null";
+        }
+        else if(which_button_press == "right")
+        {
+            // menu going down
+            if(pause_menu_position == number_of_menu_bars)
+            {
+                pause_menu_position = 1;
+            }
+            else if(pause_menu_position &lt; number_of_menu_bars and pause_menu_position &gt; 0)
+            {
+                pause_menu_position ++;
+            }
+            which_button_press = "null";
+        }
+        // calculate temp_index
+        if(pause_menu_position == 1)
+        {
+            temp_index = pause_menu_position - 1;
+        }
+        else
+        {
+            temp_index = number_of_menu_bars - (pause_menu_position - 2) - 1;
+        }
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {
+        if(pause_menu_position == 1)
+        {
+            temp_index = 0;
+        }
+        else
+        {
+            temp_index = number_of_menu_bars - (pause_menu_position - 2) - 1;
+        }
+        
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_resume)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Go back to the current game.");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_resume)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_resume, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[0] = 100;
+                }
+                else
+                {
+                    alarm[0] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+    
+    // 2. draw load game (it would be smaller and gray color and a little transparent)
+      
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    
+    temp_index ++;
+    if(temp_index &gt; number_of_menu_bars - 1)
+    {
+        temp_index = 0;
+    }
+    
+    if(move_or_not == true)
+    {
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_load, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_load, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {   
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_load_game)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Load the game to the previous finished stages.");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_load_game)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_load, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[1] = 100;
+                }
+                else
+                {
+                    alarm[1] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_load, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_load, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+    
+    // 3. draw restart 
+      
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    
+    temp_index ++;
+    if(temp_index &gt; number_of_menu_bars - 1)
+    {
+        temp_index = 0;
+    }
+    
+    if(move_or_not == true)
+    {
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_restart_this_stage, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_restart_this_stage, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {   
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_restart_this_stage)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Restart this stage.");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_restart_this_stage)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_restart_this_stage, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[2] = 100;
+                }
+                else
+                {
+                    alarm[2] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_restart_this_stage, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_restart_this_stage, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+    
+    
+    // 4. draw options 
+      
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    
+    temp_index ++;
+    if(temp_index &gt; number_of_menu_bars - 1)
+    {
+        temp_index = 0;
+    }
+    
+    if(move_or_not == true)
+    {
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_options, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_options, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {   
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_options)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Some settings");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_options)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_options, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[3] = 100;
+                }
+                else
+                {
+                    alarm[3] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_options, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_options, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+    
+    
+    // 5. draw main menu 
+      
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    
+    temp_index ++;
+    if(temp_index &gt; number_of_menu_bars - 1)
+    {
+        temp_index = 0;
+    }
+    
+    if(move_or_not == true)
+    {
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_main_menu, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_main_menu, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {   
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_main_menu)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Go back to the main menu.");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_main_menu)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_main_menu, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[4] = 100;
+                }
+                else
+                {
+                    alarm[4] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_main_menu, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_main_menu, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+
+    
+     // 6. draw quit 
+      
+    // EVERY TIME, we need to draw from [temp_index * number_of_midpoint_between_two_point] to 
+    // (temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1)
+    
+    // a) moving condition, move_or_not = true, it will be painting all the sprites between the initial position when midpoint = 0 
+    //    and the end position when midpoint = number_of_midpoint_between_two_point
+    
+    temp_index ++;
+    if(temp_index &gt; number_of_menu_bars - 1)
+    {
+        temp_index = 0;
+    }
+    
+    if(move_or_not == true)
+    {
+        //draw_text ( 10, 10, temp_index);
+        // moving
+        if(index_midpoint &lt; number_of_midpoint_between_two_point)
+        {
+            // down
+            if(left_or_right_temp == "right")
+            {
+                temp_x = vec_x[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                temp_y = vec_y[(number_of_menu_bars - 1 - temp_index) * number_of_midpoint_between_two_point + index_midpoint];
+                draw_sprite_ext( spr_pause_quit, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+            // up
+            else if (left_or_right_temp == "left")
+            {
+                if(temp_index == 0)
+                {
+                    temp_x = vec_x[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                else
+                {
+                    temp_x = vec_x[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                    temp_y = vec_y[(number_of_menu_bars - temp_index + 1) * number_of_midpoint_between_two_point - 1 - index_midpoint];
+                }
+                draw_sprite_ext( spr_pause_quit, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+                index_midpoint ++;
+            }
+        }
+        // stop moving
+        else
+        {
+            index_midpoint = 0;
+            move_or_not = false;
+            left_or_right_temp = "null";
+            //temp_x = vec_x[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            //temp_y = vec_y[temp_index * number_of_midpoint_between_two_point + number_of_midpoint_between_two_point - 1];
+            
+            //if(pause_menu_position == index_resume)
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+            //else
+                //draw_sprite_ext( spr_pause_resume, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+            //show_message("stop moving!");
+        }
+    }
+    // b) STILL condition, move_or_not = false, it will be on the initial position when midpoint = 0
+    else if(move_or_not == false)
+    {   
+        if(temp_index == 0)
+        {
+            temp_x = vec_x[0];
+            temp_y = vec_y[0];
+        }
+        else
+        {
+            temp_x = vec_x[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+            temp_y = vec_y[(number_of_menu_bars - temp_index) * number_of_midpoint_between_two_point];
+        }
+        
+        // (1). if this bar is being selected, draw bigger one
+        if(pause_menu_position == index_quit)
+        {
+            // 1) draw the menu description rectangle
+            draw_set_color(c_black);
+            draw_text(description_box_x1 + 10, description_box_y1 + 5, "Quit the game.");
+            
+            // 2) draw the bigger sprite
+            // if press enter or z then make it move to the center
+            if(index_when_press_enter == index_quit)
+            {   
+                if(moving_distance &lt; 200)
+                {
+                    difference_x = (x_of_center_of_circle - temp_x);
+                    difference_y = (y_of_center_of_circle - temp_y);
+                    difference_xy = sqrt(difference_x * difference_x + difference_y * difference_y);
+                    destination_x = temp_x + moving_distance * difference_x / difference_xy;
+                    destination_y = temp_y + moving_distance * difference_y / difference_xy;
+                    draw_sprite_ext( spr_pause_quit, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );  
+                    if(moving_distance % 2 == 0)
+                    {
+                        draw_sprite_ext( spr_pause_bomb, 0, destination_x, destination_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, image_blend, 1 ); 
+                    }
+                    moving_distance += 5;
+                    alarm[5] = 100;
+                }
+                else
+                {
+                    alarm[5] = 1;
+                }
+            }
+            // if NOT press enter or z then make it still
+            else
+            {
+                //if we press the arrow button then the bars are gonna move
+                draw_sprite_ext( spr_pause_quit, 0, temp_x, temp_y, image_xscale*scale_x_big, image_xscale*scale_y_big, 0, c_red, 1 );
+            }
+        }
+        else
+        {
+            // (2). if this bar is NOT being selected, draw smaller one
+            draw_sprite_ext( spr_pause_quit, 0, temp_x, temp_y, image_xscale*scale_x_small, image_xscale*scale_y_small, 0, c_gray, 0.8 );
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="90">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>index_when_press_enter = start_menu_position;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="40">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>move_or_not = true;
+which_button_press = "right";
+left_or_right_temp = which_button_press;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="39">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+move_or_not = true;
+which_button_press = "right";
+left_or_right_temp = which_button_press;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="38">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+move_or_not = true;
+which_button_press = "left";
+left_or_right_temp = which_button_press;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="37">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>move_or_not = true;
+which_button_press = "left";
+left_or_right_temp = which_button_press;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>show_message(global.paused);
+if(global.paused == false)
+{
+    global.paused = true;
+    room_goto(room_pause);
+}
+/*
     else if(!paused)
     {
         paused = true;
-        //room_goto(room_pause);
-        room_goto(room_start);
-    }
+        room_goto(room_pause);
+    }*/
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.paused == true)
+{
+    index_when_press_enter = pause_menu_position;
 }
 </string>
           </argument>
