@@ -6,7 +6,7 @@
   <vsnap>1</vsnap>
   <hsnap>1</hsnap>
   <isometric>0</isometric>
-  <speed>30</speed>
+  <speed>60</speed>
   <persistent>0</persistent>
   <colour>8421504</colour>
   <showcolour>-1</showcolour>
@@ -51,6 +51,7 @@
   </views>
   <instances>
     <instance objName="obj_start" x="37" y="48" name="inst_48636290" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="game_info" x="71" y="47" name="inst_EE22B5DC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

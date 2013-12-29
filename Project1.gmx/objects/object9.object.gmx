@@ -25,6 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>// if now the game is paused then we will draw the pause room
 if(paused == true)
 {
@@ -407,6 +408,9 @@ if(paused == true)
     }
     
 }
+=======
+            <string>room_caption = string( fps );
+>>>>>>> 6dd4ac3d7f6bb0dcdb4925b07a772c468c3e6c37
 </string>
           </argument>
         </arguments>
