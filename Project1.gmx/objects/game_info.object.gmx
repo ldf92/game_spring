@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_caption = string( fps );
+            <string>window_set_caption("Our game - FPS:" + string( fps ));
 </string>
           </argument>
         </arguments>
