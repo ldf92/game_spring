@@ -18,6 +18,20 @@
     <sprite>sprites\spr_start_credits</sprite>
     <sprite>sprites\spr_start_quit</sprite>
     <sprite>sprites\spr_start_bomb</sprite>
+    <sprites name="skeleton">
+      <sprite>sprites\S_L_STAND_L</sprite>
+      <sprite>sprites\S_L_STAND_R</sprite>
+      <sprite>sprites\S_L_S2SB_L</sprite>
+      <sprite>sprites\S_L_S2SB_R</sprite>
+      <sprite>sprites\S_L_WALK_L</sprite>
+      <sprite>sprites\S_L_WALK_R</sprite>
+      <sprite>sprites\S_L_ATTACK_L</sprite>
+      <sprite>sprites\S_L_ATTACK_R</sprite>
+      <sprite>sprites\S_L_DEAD_L</sprite>
+      <sprite>sprites\S_L_DEAD_R</sprite>
+      <sprite>sprites\S_L_STANDBY_L</sprite>
+      <sprite>sprites\S_L_STANDBY_R</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background1</background>
@@ -39,6 +53,10 @@
     <object>objects\obj_typewritter</object>
     <object>objects\obj_start</object>
     <object>objects\game_info</object>
+    <objects name="enemy">
+      <object>objects\skeleton</object>
+      <object>objects\monster</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <rooms name="Menu">
@@ -50,6 +68,16 @@
       <room>rooms\room_game</room>
     </rooms>
   </rooms>
+  <constants number="8">
+    <constant name="DIRECTION_LEFT">1</constant>
+    <constant name="DIRECTION_RIGHT">0</constant>
+    <constant name="MONSTER_DEAD">5</constant>
+    <constant name="MONSTER_ATTACK">4</constant>
+    <constant name="MONSTER_WALKING">3</constant>
+    <constant name="MONSTER_STAND_BY">2</constant>
+    <constant name="MONSTER_WAKE_UP">1</constant>
+    <constant name="MONSTER_SLEEP">0</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
